@@ -46,7 +46,8 @@ async def main():
         },
         base_url=sources_config['elitetrader']['base_url'],
         categories=sources_config['elitetrader']['categories'],
-        max_posts_per_run=sources_config['elitetrader']['max_posts_per_run']
+        max_posts_per_run=sources_config['elitetrader']['max_posts_per_run'],
+        from_days_ago=app_config['app']['run_interval_days']
     )
     posts = scraper.scrape_posts()
 
