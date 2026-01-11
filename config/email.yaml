@@ -3,9 +3,8 @@ smtp:
   port: 587
   username: ""
   password: ""
+  sender: "example@gmail.com"
+  recipients:
+    - "example@gmail.com"
 
-from: "Posts Monitor <>"
-to:
-  - ""
-
-subject: "EliteTrader Intent Digest"
+subject: "EliteTrader Posts Ingest"

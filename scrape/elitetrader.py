@@ -3,7 +3,7 @@ import aiohttp
 import re
 from bs4 import BeautifulSoup
 from typing import List, Dict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from utils.log_debug import log_debug
 
@@ -60,14 +60,25 @@ class EliteTraderScraper:
 
         body = message.select_one("div.bbWrapper")
         content_html = str(body) if body else ""
+        if not body:
+            return {}
+
+        for quote in body.select("blockquote"):
+            quote.decompose()
+
+        for tag in body.select("script, style"):
+            tag.decompose()
+
+        content_text = body.get_text(separator="\n", strip=True)
 
         return {
-            "content": content_html,
+            "content_html": content_html,
+            "content_text": content_text
         }
 
     async def scrape_posts(self) -> List[Dict]:
         posts: List[Dict] = []
-        from_date = datetime.utcnow() - timedelta(days=self.from_days_ago)
+        cutoff = datetime.now(timezone.utc) - timedelta(days=self.from_days_ago)
 
         timeout = aiohttp.ClientTimeout(total=self.timeout)
         connector = aiohttp.TCPConnector(limit=4)
@@ -87,6 +98,7 @@ class EliteTraderScraper:
 
                 soup = BeautifulSoup(html, "html.parser")
                 last_page = self._get_last_page_number(soup)
+                log_debug(f"Total pages detected: {last_page}")
 
                 for page in range(1, last_page + 1):
                     page_url = base_url if page == 1 else f"{base_url}/page-{page}"
@@ -126,7 +138,7 @@ class EliteTraderScraper:
                                 continue
 
                             label = dt.get_text(strip=True).lower()
-                            value = int(re.sub(r"[^\d]", "", dd.get_text()) or 0)
+                            value = self._parse_count(dd.get_text())
 
                             if label == "replies":
                                 replies = value
@@ -135,26 +147,31 @@ class EliteTraderScraper:
 
                         time_tag = item.select_one("time.structItem-latestDate")
                         if time_tag and time_tag.has_attr("datetime"):
-                            published_at = datetime.fromisoformat(time_tag["datetime"])
+                            published_at = datetime.fromisoformat(
+                                time_tag["datetime"]
+                            ).astimezone(timezone.utc)
+
                         else:
                             published_at = datetime.utcnow()
 
-                        if published_at.date() < from_date.date():
+                        if published_at < cutoff:
                             stop = True
                             break
 
-
-
-                        # thread = await self._scrape_thread(session, post_url)
-                        # if not thread:
-                        #     continue
+                        content = await self._scrape_thread(session, post_url)
+                        if content:
+                            content_html = content.get("content_html", "")
+                            content_text = content.get("content_text", "")
+                        else:
+                            content_html = ""
 
                         posts.append({
                             "platform": "elitetrader",
                             "external_id": external_id,
                             "url": post_url,
                             "title": title,
-                            "content": "",
+                            "content_text": content_text,
+                            # "content_html": content_html,
                             "author": author,
                             "replies": replies,
                             "views": views,
@@ -170,5 +187,13 @@ class EliteTraderScraper:
                     if stop:
                         break
 
-        log_debug(f"✅ Scraped {len(posts)} full EliteTrader posts")
+        log_debug(f"Scraped {len(posts)} full EliteTrader posts")
         return posts
+
+    def _parse_count(self, text: str) -> int:
+        t = text.strip().upper().replace(",", "")
+        if t.endswith("K"):
+            return int(float(t[:-1]) * 1_000)
+        if t.endswith("M"):
+            return int(float(t[:-1]) * 1_000_000)
+        return int(re.sub(r"[^\d]", "", t) or 0)

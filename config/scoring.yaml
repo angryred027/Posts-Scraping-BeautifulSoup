@@ -10,3 +10,5 @@ structural_bonuses:
   post_length_gt_1000: 2
   contains_code_snippet: 2
   contains_equity_curve_or_stats: 2
+  comment_count_gt_10: 1
+  op_replying_thoughtfully: 1
