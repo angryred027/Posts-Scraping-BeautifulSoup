@@ -1,0 +1,79 @@
+positive:
+
+  core_system:
+    overfit: 4
+    overfitting: 4
+    curve fit: 4
+
+    walk forward: 3
+    walk-forward: 3
+    wfo: 3
+
+    live vs backtest: 4
+    backtest doesn't work live: 5
+    strategy stopped working: 5
+
+    edge decay: 4
+    strategy decay: 4
+
+    robust: 3
+    robustness: 3
+
+    monte carlo: 3
+    stress test: 3
+
+  portfolio:
+    portfolio of strategies: 4
+    correlation: 3
+    diversification: 3
+    position sizing: 3
+    risk per trade: 3
+    volatility targeting: 4
+    drawdown: 3
+    max drawdown: 3
+    mdd: 3
+    capital allocation: 4
+    ensemble: 3
+    regime: 3
+    market regime: 3
+
+  transition:
+    rules-based: 2
+    systematic: 2
+    algorithmic: 2
+    algo trading: 2
+    automate my strategy: 3
+    paper trading: 2
+    forward testing: 3
+    execution: 2
+    slippage: 2
+    commission impact: 2
+
+  platforms:
+    ninjatrader: 2
+    nt8: 2
+    tradestation: 2
+    easylanguage: 2
+    strategyquant: 4
+    adaptrade: 4
+    sqx: 4
+    strategy quant: 4
+    tradingview: 1
+    pine script: 1
+    ibkr: 1
+    interactive brokers: 1
+
+negative:
+  signals: -5
+  signal service: -5
+  copy trade: -5
+  copy trading: -5
+  telegram: -4
+  discord signals: -4
+  get rich quick: -6
+  guaranteed: -4
+  which stock to buy: -5
+  what should i buy today: -5
+  crypto moon: -6
+  100x: -6
+  indicator only: -3

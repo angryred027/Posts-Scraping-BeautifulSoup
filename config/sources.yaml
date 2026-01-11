@@ -1,0 +1,15 @@
+ninjatrader:
+  platform: ninjatrader
+  base_url: "https://forum.ninjatrader.com"
+  categories:
+    - name: "Strategy Development"
+      url: "https://forum.ninjatrader.com/forum/ninjatrader-8/strategy-development"
+  max_posts_per_run: 100
+
+elitetrader:
+  platform: elitetrader
+  base_url: "https://elitetrader.com"
+  categories:
+    - name: "New Posts"
+      url: "https://www.elitetrader.com/et/whats-new/posts/"
+  max_posts_per_run: 100

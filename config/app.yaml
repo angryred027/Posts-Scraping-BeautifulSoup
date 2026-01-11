@@ -1,0 +1,5 @@
+app:
+  name: "Posts Monitoring"
+  run_mode: "daily"
+  user_agent: "Mozilla/5.0  (Post Monitoring)"
+  timezone: "UTC"

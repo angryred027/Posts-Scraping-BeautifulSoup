@@ -1,0 +1,11 @@
+smtp:
+  host: "smtp.gmail.com"
+  port: 587
+  username: "your_email@gmail.com"
+  password: "app_password_here"
+
+from: "NinjaTrader Monitor <your_email@gmail.com>"
+to:
+  - "recipient@gmail.com"
+
+subject: "Daily NinjaTrader Intent Digest"

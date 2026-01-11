@@ -1,0 +1,9 @@
+thresholds:
+  minimum_score: 3
+  top_n: 30
+
+structural_bonuses:
+  post_length_gt_500: 1
+  post_length_gt_1000: 2
+  contains_code_snippet: 2
+  contains_equity_curve_or_stats: 2
