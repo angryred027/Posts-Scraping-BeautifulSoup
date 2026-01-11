@@ -1,6 +1,6 @@
 app:
   name: "Posts Monitoring"
   run_mode: "daily"
-  run_interval_days: 3
+  run_interval_days: 1
   user_agent: "Mozilla/5.0  (Post Monitoring)"
   timezone: "UTC"

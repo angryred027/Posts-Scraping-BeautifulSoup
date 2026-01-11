@@ -4,3 +4,4 @@ pyyaml
 python-dotenv
 sqlalchemy
 asyncpg
+aiohttp

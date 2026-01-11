@@ -49,13 +49,15 @@ async def main():
         max_posts_per_run=sources_config['elitetrader']['max_posts_per_run'],
         from_days_ago=app_config['app']['run_interval_days']
     )
-    posts = scraper.scrape_posts()
+    posts = await scraper.scrape_posts()
 
+    file_path = Path("debug/elitetrader_posts.yaml")
+    file_path.parent.mkdir(parents=True, exist_ok=True)
     if posts and len(posts) > 0:
-        with open("debug/elitetrader_posts.yaml", "w", encoding="utf-8") as f:
+        with open(file_path, "w", encoding="utf-8") as f:
             yaml.dump(posts, f, allow_unicode=True)
         
-        log_debug(f"✅ Saved {len(posts)} scraped posts to debug/elitetrader_posts.yaml")
+        log_debug(f"✅ Saved {len(posts)} scraped posts to {file_path}")
 
     # - score posts
     # - build digest
