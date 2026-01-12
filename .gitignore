@@ -1,7 +1,7 @@
 /venv
 
 .env
-.env*
+.env.local
 
 __pycache__/
 *.pyc

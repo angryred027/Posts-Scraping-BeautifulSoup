@@ -12,7 +12,6 @@ def format_human_time(value) -> str:
       Jan 11 at 7:21 AM
     """
 
-    # Normalize input
     if isinstance(value, datetime):
         dt = value
     elif isinstance(value, str):
@@ -20,7 +19,6 @@ def format_human_time(value) -> str:
     else:
         return ""
 
-    # Assume UTC if no tzinfo
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone.utc)
 

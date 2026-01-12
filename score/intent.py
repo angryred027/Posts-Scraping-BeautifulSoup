@@ -1,7 +1,5 @@
 import re
 from typing import Dict, List
-
-
 class IntentScorer:
     def __init__(self, scoring_config: dict, keywords_config: dict):
         self.scoring = scoring_config
@@ -16,9 +14,6 @@ class IntentScorer:
         self.positive = keywords_config.get("positive", {})
         self.negative = keywords_config.get("negative", {})
 
-    # -----------------------------
-    # Public APIs
-    # -----------------------------
     def score_posts(self, posts: List[Dict]) -> List[Dict]:
         for post in posts:
             score, reasons = self.score_single_post(post)
@@ -119,9 +114,6 @@ class IntentScorer:
 
         return score, reasons
 
-    # -----------------------------
-    # Helpers
-    # -----------------------------
     def _contains_code(self, text: str) -> bool:
         return bool(re.search(r"(<code>|```|def |class |;)", text))
 
