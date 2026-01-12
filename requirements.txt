@@ -6,4 +6,3 @@ sqlalchemy
 asyncpg
 aiohttp
 rich
-python-dotenv
