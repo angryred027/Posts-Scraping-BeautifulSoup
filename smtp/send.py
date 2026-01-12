@@ -55,7 +55,7 @@ class EmailSender:
                                 <tr>
                                     <td valign="top" style="width: 50%; padding: 12px 16px;">
                                         <a href="{escape(post['url'])}" style="color: #4f7cba; font-size: 16px; text-decoration: none; font-weight: normal; display: block; margin-bottom: 6px;">
-                                            {escape(post['title'])}
+                                            {escape(post['category'])}::{escape(post['title'])}
                                         </a>
                                         <div style="font-size: 12px; color: #6b7280; line-height: 1.5;">
                                             {escape(post['author'])}
@@ -99,6 +99,13 @@ class EmailSender:
                           </table>
                       </td>
                   </tr>
+                  <tr>
+                    <td style="padding: 24px 16px; text-align: center;">
+                        <a href="https://www.elitetrader.com/et/whats-new/posts" style="display: inline-block; background-color: #4f7cba; color: #ffffff; text-decoration: none; padding: 12px 32px; border-radius: 6px; font-size: 14px; font-weight: 500;">
+                            View All Posts
+                        </a>
+                    </td>
+                </tr>
               </table>
           </body>
           </html>

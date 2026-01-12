@@ -2,8 +2,7 @@ title: 6
 content: 4
 
 thresholds:
-  minimum_score: 3
-  top_n: 30
+  minimum_score: 5
 
 structural_bonuses:
   post_length_gt_500: 1

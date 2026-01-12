@@ -128,6 +128,14 @@ class EliteTraderScraper:
                         post_url = href if href.startswith("http") else f"{self.base_url}{href}"
                         author_tag = item.select_one("ul.structItem-parts a.username")
                         author = author_tag.get_text(strip=True) if author_tag else ""
+                        category_tag = None
+                        for li in item.select("ul.structItem-parts li a"):
+                            href = li.get("href", "")
+                            if "/forums/" in href:
+                                category_tag = li
+                                break
+
+                        category_name = category_tag.get_text(strip=True) if category_tag else ""
                         replies = 0
                         views = 0
 
@@ -169,6 +177,7 @@ class EliteTraderScraper:
                             "platform": "elitetrader",
                             "external_id": external_id,
                             "url": post_url,
+                            "category": category_name,
                             "title": title,
                             "content_text": content_text,
                             # "content_html": content_html,
