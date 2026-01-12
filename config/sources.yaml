@@ -12,4 +12,4 @@ elitetrader:
   categories:
     - name: "New Posts"
       url: "https://www.elitetrader.com/et/whats-new/posts/"
-  max_posts_per_run: 100
+  max_posts_per_run: 10

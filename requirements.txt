@@ -4,3 +4,6 @@ pyyaml
 python-dotenv
 sqlalchemy
 asyncpg
+aiohttp
+rich
+python-dotenv

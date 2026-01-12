@@ -84,8 +84,7 @@ async def create_tables():
         score INT,
         summary TEXT,
         engagement JSONB,
-        suggested_replies JSONB,
-
+        
         CONSTRAINT posts_unique
             UNIQUE (platform, external_id)
     );
